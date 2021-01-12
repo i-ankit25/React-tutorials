@@ -26,37 +26,30 @@ function BookList() {
   return (
     <section className= "booklist">
       {books.map((book) => {
-        return <Book key={book.id} /*book={book}*/ {...book}></Book>
+        return <Book key={book.id} {...book}></Book>
   })}
      </section>
   );
 }
-/*One of the ways for defining components using  Nesting
-
-const Book = () => {
-  return <article className='book'>
-    <Image></Image>
-    <Title></Title>
-    <Author></Author>
-  </article>
-}
-
-const Image = () => <img src="https://images-eu.ssl-images-amazon.com/images/I/51oHUvYzbsL._AC_UL200_SR200,200_.jpg"
-  alt="" />
- 
-const Title = () => <h1>The Theory of Everything</h1>
-
-const Author = () => <h4 style={{ color: '#617d98', fontSize: '0.75rem', marginTop: '0.25rem' }}>Stephen Hawking</h4>
- */
 
   
-const Book = (props /* object destructing can be done this way as well {img, title, author, children}*/) => {
+const Book = (props ) => {
+  // attribute, eventHandler
+  const clickHandler = () => {
+    alert('hello world');
+  };
+  const complexExample = () => {
+    console.log(props.author);
+  };
   return (
-    <article className='book'>
+    <article className='book' onMouseOver={() => {
+      console.log(props.title);
+    }}>
       <img src={props.img} alt="" />
-      <h1>{props.title}</h1>
+      <h1 onClick={() => console.log(props.title)}/*inline function*/>{props.title}</h1>
       <h4>{props.author}</h4>
-       {/* {props.children} */}
+      <button type="button" onClick={clickHandler}/*reference*/>refernece example</button>
+      <button type="button" onClick={() => complexExample(props.author)}/*reference*/>more complex example</button>
     </article>
   );
 }
